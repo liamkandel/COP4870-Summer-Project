@@ -40,35 +40,31 @@ namespace ShopApp
             var item = items.FirstOrDefault(i => i.Id == id);
             if (item == null)
             { return false; }
-            else if (id > items.Count || id <= 0)
-            { return false; }
-
-            else
-            {
-
-                return true;
-            }
+            else { return true; }
 
         }
-        public bool Update(int id, Item item)
+        public bool Update(int id, Item itemUpdated)
         {
             if (items == null)
                 return false;
-            if (id > items.Count || id <= 0)
-                return false;
 
-            item.Id = items[id - 1].Id;
+            var item = items.FirstOrDefault(i => i.Id == id);
+            if (item == null) return false;
 
-            items[id - 1] = item;
+            itemUpdated.Id = item.Id;
+
+            int index = items.IndexOf(item);
+            items[index] = itemUpdated;
+
             return true;
         }
-        public bool Delete(int index)
+        public bool Delete(int id)
         {
             if (items == null)
                 return false;
-            else if (index <= 0 || index > items.Count)
-                return false;
-            items.RemoveAt(index - 1);
+            var item = items.FirstOrDefault(i => i.Id == id);
+            if (item == null) { return false; }
+            items.Remove(item);
             return true;
         }
         public void Print()
@@ -87,16 +83,13 @@ namespace ShopApp
             }
         }
 
-        public Item getItem(int index)
+        public Item getItem(int id)
         {
-            if (items == null)
-                return new Item();
-            if (index < 1 || index > items.Count)
-                return new Item();
-            if (items[index - 1] == null)
-            { return new Item(); }
+            if (items == null) { return new Item(); }
+            var item = items.FirstOrDefault(i => i.Id == id);
+            if (item == null) { return new Item(); }
 
-            return items[index - 1];
+            return item;
         }
     }
 }

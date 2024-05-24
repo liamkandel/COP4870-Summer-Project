@@ -48,11 +48,13 @@ namespace ShopApp
             if (cart == null) { return false; }
             else if (inventory == null) { return false; }
             else if (cart.Count == 0) { return false; }
-            else if (id <= 0 || id > cart.Count) { return false; }
+            var item = cart.FirstOrDefault(i => i.Id == id);
+            if (item == null) { return false; }
             else
             {
                 inventory.getItem(id).Stock++;
-                cart.RemoveAt(id - 1);
+
+                cart.Remove(item);
                 return true;
             }
 

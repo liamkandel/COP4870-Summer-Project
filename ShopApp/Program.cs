@@ -110,6 +110,8 @@ namespace ShopApp
                                 Console.Clear();
                                 Console.WriteLine("ID\tName\t\tPrice($)\tStock");
 
+                                Console.WriteLine(inventory.getItem(intId).ToString() + inventory.getItem(intId).Description);
+
                                 if (!inventory.Read(intId))
                                 {
                                     Console.WriteLine("Read unsuccessful");
@@ -165,7 +167,7 @@ namespace ShopApp
 
                             Console.WriteLine("Delete? y/N");
                             string? shouldDelete = Console.ReadLine() ?? "n";
-                            if (shouldDelete?.ToLower() == "n" || !inventory.Delete(intId))
+                            if (shouldDelete?.ToLower() != "y" || !inventory.Delete(intId))
                             {
                                 Console.WriteLine("Delete unsucessful");
                                 break;
