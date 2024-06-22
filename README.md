@@ -1,1 +1,1 @@
-This repo contains code files for the project developed throughout the COP4870 C# Full Stack development class. 
+This repo contains programming assingmnet 1 for cop 4870 summer class
